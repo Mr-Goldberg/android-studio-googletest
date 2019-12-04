@@ -12,6 +12,14 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11"
+
+                // Tests are enabled by default.
+                // To disable tests add line "enable_cpp_tests=false" into the file "local.properties".
+                arguments "-DENABLE_CPP_TESTS=" + get_enable_cpp_tests().toString()
+
+                // Use location of Android Sdk from "local.properties".
+                // This is required to find path to "adb" tool.
+                arguments "-DANDROID_SDK_ROOT=" + get_android_sdk_root().toString()
             }
         }
     }
@@ -36,4 +44,18 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+def get_enable_cpp_tests() {
+    return get_properties().getProperty('enable_cpp_tests', 'true').toBoolean()
+}
+
+def get_android_sdk_root() {
+    return get_properties().getProperty('sdk.dir', '').toString()
+}
+
+def get_properties() {
+    Properties properties = new Properties()
+    properties.load(new File(rootDir.absolutePath + '/local.properties').newDataInputStream())
+    return properties
 }
