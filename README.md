@@ -1,8 +1,11 @@
 # Google Test Integration With Android Studio
 
 This project demonstrates the way to integrate the Google Test C++ unit testing library with Android Studio.
+
 The tests are integrated through `CMake (in CMakeLists.txt)` and run as a post-build event.
+
 This sample project is inspired by: https://stackoverflow.com/questions/46429958/android-ndk-with-google-test
+
 How to integrate Google Test with XCode for iOS you can check here: https://github.com/mattstevens/xcode-googletest
 
 # Run and output
@@ -10,6 +13,7 @@ How to integrate Google Test with XCode for iOS you can check here: https://gith
 Tests are post-native-build. They can be executed by pressing `Play` button, or executing gradle build by wide variety of ways, no matter in Android Studio or not. If tests are failed, next build steps (run application, etc.) will not be executed.
 
 After execution of tests check the `Build / Build Output` tab of Android Studio to see the test **output**. 
+
 Here is an example:
 ```
 /mnt/disk2/dev/Pets/android-studio-googletest/app/.cxx/cmake/debug/arm64-v8a/native-tests-lib: 1 file pushed. 26.6 MB/s (6925720 bytes in 0.248s)
@@ -55,8 +59,11 @@ TEST(CreateWelcomingString, Validity)
 `app/src/test/cpp/CMakeLists.txt`
 
 Variables passed to the script:
+
 `TEST_SRC_DIR` Source dir for tests. Passed from the main script (in which this one is included).
+
 `ENABLE_CPP_TESTS` determines if tests will build & run.
+
 `ANDROID_SDK_ROOT` required to find path to `adb` tool.
 
 ```
@@ -104,6 +111,7 @@ endif () # ENABLE_CPP_TESTS
 ```
 
 ### Edit Main CMakeLists.txt to include the Test script
+
 `app/src/main/cpp/CMakeLists.txt`
 
 Include main sources directory, so `#include` directive will work correctly in the test files. This is relative to this file location.
@@ -121,6 +129,7 @@ include(../../test/cpp/CMakeLists.txt)
 `app/build.gradle`
 
 Pass the required variables into CMake script.
+
 I prefer to do it in this script instead of creating encironment variable(s).
 ```
 android {
