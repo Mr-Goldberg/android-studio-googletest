@@ -1,5 +1,3 @@
-README
-
 # Google Test Integration With Android Studio
 
 This project demonstrates the way to integrate the Google Test C++ unit testing library with Android Studio.
